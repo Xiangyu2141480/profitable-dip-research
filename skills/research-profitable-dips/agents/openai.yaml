@@ -1,0 +1,4 @@
+interface:
+  display_name: "盈利股暴跌研究"
+  short_description: "核查跌幅榜公司的真实盈利、下跌原因与估值，形成有证据的研究决策和复盘"
+  default_prompt: "用 $research-profitable-dips 分析这份跌幅榜，核查持续盈利与现金流、下跌原因和估值，给出研究优先级、关键反证及持有期限所需证据。"
