@@ -1,2 +1,61 @@
-# profitable-dip-research
-Research profitable stocks after sharp declines: an evidence-based Agent Skill with earnings-quality checks, valuation, execution risks, and 33 sources. 盈利股暴跌研究与交易复盘技能。
+# Profitable Dip Research · 盈利股暴跌研究
+
+从 Top Losers、暴跌新闻或股票名单开始，核查公司是否持续赚钱、为什么下跌、当前估值是否有依据，以及持有期限是否匹配。把研究结论和交易优势分别验证。
+
+本仓库提供一个中文为主的 Agent Skill：**research-profitable-dips**。支持股票截图筛选、单公司研究、抄底经验核查、补仓决策分析与交易复盘。资料基线为 **2026-11-25**；行情、财报、费用和规则在实际使用时重新核查。
+
+## 直接这样用
+
+安装后输入：
+
+> 用 $research-profitable-dips 分析这份 Top Losers 截图。先确认证券身份，再核查法定盈利与现金流、下跌原因和估值，给出研究优先级、关键反证和缺失资料。
+
+也可以问：
+
+- “这家公司调整后利润为正，法定利润为负，算真正盈利吗？”
+- “公司仍赚钱，但财报后跌了20%。我只研究10个交易日的反弹，需要什么证据？”
+- “这些补仓解套的经验能证明方法有效吗？请按原始材料核查。”
+- “这是全部已实现与未实现损益、追加资金和费用，帮我复盘，不只统计已卖出交易。”
+
+## 安装
+
+在支持 Agent Skills 的客户端导入 [完整技能目录](skills/research-profitable-dips)。使用 [skills CLI](https://github.com/vercel-labs/skills) 时：
+
+```sh
+npx skills add Xiangyu2141480/profitable-dip-research --skill research-profitable-dips
+```
+
+按客户端提示选择安装位置和使用的代理。安装命令遵循 skills CLI 的仓库与技能选择语法；本项目没有替所有客户端实际执行安装测试。
+
+## 它会检查什么
+
+| 环节 | 具体检查 |
+|---|---|
+| 证券身份 | 普通股、ADR、CFD、杠杆／反向ETP；交易所、报价单位、重复挂牌 |
+| 盈利口径 | 法定／调整后、归母／合并、税前／税后、单季／全年／TTM |
+| 现金与持续性 | 一次性收益、营运资本、资本开支、稀释、债务、行业差异 |
+| 下跌原因 | 最新公告、指引、订单、资金压力、估值变化，以及反证 |
+| 估值与期限 | 正常年份／前瞻盈利；长期价值与短期反转分别处理 |
+| 执行与复盘 | 可成交报价、费用、换汇、跳空、全部损益、资金占用与基准 |
+
+输出采用四类研究结论：**继续研究、观察、排除出当前策略、无法判定**。可以得出“目前没有合格候选”。研究排序不直接等同于买入建议。
+
+## 文件与资料
+
+| 文件 | 用途 |
+|---|---|
+| [SKILL.md](skills/research-profitable-dips/SKILL.md) | 触发条件、执行流程、证据要求和输出格式 |
+| [盈利口径与财务质量](skills/research-profitable-dips/references/profitability.md) | TTM、一次性项目、现金流、稀释与行业适配 |
+| [证据与策略验证](skills/research-profitable-dips/references/evidence-and-validation.md) | 研究边界、时间一致性、回测和完整账户评估 |
+| [案例与33份来源](skills/research-profitable-dips/references/cases-and-sources.md) | 历史案例、原始链接及每份材料的适用限制 |
+| [研究卡与复盘模板](skills/research-profitable-dips/references/templates.md) | 筛选表、单公司研究卡、计划参数、模拟日志 |
+| [行为场景](evals/scenarios.md) | 可重复运行的合成任务 |
+| [校验记录](evals/results.md) | 本版本实际完成的检查及限制 |
+
+33份资料包括公司披露、投资者原文、学术／机构研究、监管与券商说明，以及未经完整流水验证的社区自述。仅提供简述和原始链接，外部文章及商标的权利归原权利人。
+
+## 使用边界
+
+这个 skill 执行研究、方案比较和模拟复盘，不包含真实下单、改单、撤单、资金划转或自动交易。它要求对动态信息重新核查，不把历史案例、旧费率、少量模拟或论文平均收益当成当前个股的盈利保证。
+
+规则或引用需要更新时，先保留原始证据、实际失误和一个可重复场景，再修改对应文件。不要通过删掉失败样本、事后选择退出日或省略浮亏来“改好”策略。
